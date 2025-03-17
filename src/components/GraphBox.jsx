@@ -5,15 +5,15 @@ import { LineChart } from '@mui/x-charts/LineChart';
 function GraphBox() {
   const queries = 345677
     return (
-      <Paper sx={{borderRadius:5, width:500, padding:2}} >
+      <Paper elevation={5} sx={{borderRadius:5, width:500, padding:2}} >
         <Typography variant='h5' >
           Total no.of queries
         </Typography>
-        <Paper sx={{margin:1}}>
+        <Paper elevation={5} sx={{margin:1}}>
           <Typography variant='h4' fontWeight={"bold"} textAlign='center'>
             {queries}
           </Typography>
-        </Paper>
+        </Paper >
         <LineChart
         xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
         series={[
