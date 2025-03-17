@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 
 function TopBar() {
     return(
-        <Box sx={{display:'flex', margin:"20px"}}>
+        <Box sx={{display:'flex', margin:4}}>
             <Stack direction="row" spacing={15} alignItems={'center'}>
                 <img src={logo} alt='sqlancer logo' style={{ width: 'auto', height: '100px' }}/>
                 

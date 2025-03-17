@@ -1,10 +1,11 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { bugs_info } from '../data/mockdata';
+
 import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 
-function BugsTable() {
+function BugsTable({data}) {
 
     const columns = [
         { field: "id", headerName: "Bug ID"},
@@ -14,14 +15,21 @@ function BugsTable() {
         { field: "seed", headerName: "Seed", flex:1},
       ];
       
+    const navigate = useNavigate(); // Initialize the useNavigate hook
+    
+    // Function to handle row click
+    function handleRowClick (params) {
+    // Navigate to the RowDetails page with the clicked row's id
+    navigate('/bugdetails', { state: { bug: params.row } });
+    };
     return (
-        <Box>
-            <Box height="80vh">
-                <DataGrid
-                rows={bugs_info}
-                columns={columns}/>
+            <Box>
+                <DataGrid 
+                rows={data}
+                columns={columns}
+                onRowClick={handleRowClick}/>
             </Box>
-        </Box>
+        
     )
 }
 
