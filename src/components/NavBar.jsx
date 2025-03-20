@@ -9,9 +9,10 @@ function Navbar() {
           justifyContent: 'space-around', // Evenly space the buttons
           alignItems: 'center',  // Center align items vertically
           backgroundColor: '#1A1C1E',  // Background color of the NavBar
-          padding: '10px 20px',  // Padding inside the navbar
+          
           borderRadius: '100px',  // Rounded corners for the navbar
-          width: '500px',  // Full width of the page
+          height: "70px",
+          width: '500px'  // Full width of the page
         }}
       >
         <Button
@@ -19,12 +20,15 @@ function Navbar() {
           to="/"  // Link to Dashboard
           color="inherit"
           sx={{
-            borderRadius: '12px', // Rounded corners for the button
+            flex:1,
+            borderRadius: '100px', // Rounded corners for the button
             padding: '8px 16px',  // Adjust padding for better button size
             textTransform: 'none', // Keep text in normal case (no uppercase)
           }}
         >
-          Dashboard
+          <Typography variant="h4">
+            Dashboard
+          </Typography>
         </Button>
         
         <Button
@@ -32,12 +36,15 @@ function Navbar() {
           to="/bugs"  // Link to Bugs
           color="inherit"
           sx={{
-            borderRadius: '12px', // Rounded corners for the button
+            flex:1,
+            borderRadius: '100px', // Rounded corners for the button
             padding: '8px 16px',  // Adjust padding for better button size
             textTransform: 'none', // Keep text in normal case (no uppercase)
           }}
         >
-          Bugs
+          <Typography variant="h4">
+            Bugs
+          </Typography>
         </Button>
       </Box>
     );
