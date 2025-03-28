@@ -14,7 +14,26 @@ function BugsTable({data}) {
     const [error, setError] = useState(null);
     const navigate = useNavigate(); // Initialize the useNavigate hook
 
+    // Function to process and structure reports
+    const processReports = (rawData) => {
+        if (!Array.isArray(rawData)) return []; 
+        return rawData.map((report, index) => ({
+            id: report.id || index,
+            date: report.report_date || "N/A",
+            database: report.db_type || "Unknown",
+            version: report.db_version || "Unknown",
+            seed: report.seed || "N/A",
+            ...report
+        }));
+    };
+
     useEffect(() => {
+        if (data) {
+            setReports(processReports(data));
+                    setLoading(false);
+                    return;
+                }
+
         const fetchReports = async () => {
             try {
                 const data = await get_all_reports();
@@ -25,14 +44,7 @@ function BugsTable({data}) {
                     throw new Error("Invalid response format.");
                 }
     
-                setReports(data.map((report, index) => ({
-                    id: report.id || index, 
-                    date: report.report_date || "N/A", 
-                    database: report.db_type || "Unknown",
-                    version: report.db_version || "Unknown",
-                    seed: report.seed || "N/A",
-                    ...report
-                })));
+                setReports(processReports(data));
             } catch (err) {
                 console.error("Error fetching reports:", err);
                 setError(err.message);
@@ -60,7 +72,7 @@ function BugsTable({data}) {
     // Function to handle row click
     function handleRowClick (params) {
     // Navigate to the RowDetails page with the clicked row's id
-    navigate('/bugdetails', { state: { bug: params.row } });
+    navigate(`/bugdetails/${params.row.id}`);
     };
 
     return (

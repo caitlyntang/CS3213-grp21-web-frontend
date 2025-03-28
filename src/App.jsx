@@ -17,7 +17,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Dashboard/>}/>
         <Route path="/bugs" element={<Bugs/>}/>
-        <Route path="/bugdetails/" element={<BugDetails/>}/>
+        <Route path="/bugdetails/:id" element={<BugDetails/>}/>
         </Routes>
       </main>
     </ThemeProvider>
