@@ -1,24 +1,31 @@
-const config_util = require('./utils/config.js')
-const app_config = config_util.get_config()
+import get_config from './utils/config.js';
+
+
+const app_config = get_config()
 const server_url = app_config.server_url
 
-exports.get_all_reports = async function() {
+export async function get_all_reports() {
     try {
-        const response = await fetch(server_url);
+        console.log(`Fetching from: ${server_url}`);
+
+        const response = await fetch(`${server_url}all_reports`);
+
+        const text = await response.text(); // Read response as text to inspect it
+        console.log("Raw Response:", text); // Log raw response to check if it's JSON or HTML
+
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
     
-        const json = await response.json();
-        return json;
-      } catch (error) {
-        console.error(error.message);
-      }
+        return JSON.parse(text); // Parse JSON only if response is valid
+    } catch (error) {
+        console.error("Error in get_all_reports:", error.message);
+    }
 }
 
-exports.get_report_by_id = async function(id) {
+export async function get_report_by_id(id) {
     try {
-        const response = await fetch(`${server_url}${id}`);
+        const response = await fetch(`${server_url}report_by_id/${id}`);
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }

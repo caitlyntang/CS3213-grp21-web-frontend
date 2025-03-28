@@ -1,5 +1,7 @@
-const fs = require('fs')
-
-exports.get_config = function() {
-    return JSON.parse(fs.readFileSync('config.json'));
+const config = {
+    server_url: "http://localhost:3000/"
 };
+
+export default function get_config() {
+    return config;
+}
