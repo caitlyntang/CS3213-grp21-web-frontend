@@ -1,4 +1,5 @@
 import { Box, Typography, CircularProgress, Alert } from "@mui/material";
+import React from "react";
 
 function BugLogs({logs}) {
     const formattedLogs = logs.replace(/\\r\\n/g, '\r\n')  // Convert escaped newlines into real newlines

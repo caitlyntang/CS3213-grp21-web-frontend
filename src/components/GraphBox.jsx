@@ -1,5 +1,6 @@
 import { Paper, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
+import React from "react";
 
 
 function GraphBox() {
