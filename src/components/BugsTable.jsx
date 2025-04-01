@@ -4,6 +4,7 @@ import { Alert, Box, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from "react";
+import React from "react";
 import { get_all_reports } from '../apis.js';
 
 
@@ -68,7 +69,7 @@ function BugsTable({data}) {
       ];
       
 
-    
+
     // Function to handle row click
     function handleRowClick (params) {
     // Navigate to the RowDetails page with the clicked row's id
