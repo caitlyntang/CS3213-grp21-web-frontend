@@ -2,6 +2,8 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import BugsTable from "../BugsTable";
+import userEvent from "@testing-library/user-event"; // for simulating clicks
+
 
 // Mock the `get_all_reports` API function
 jest.mock("../../apis.js", () => ({
@@ -72,6 +74,29 @@ describe("BugsTable Component Tests", () => {
         expect(screen.getByText("MySQL")).toBeInTheDocument();
         expect(screen.getByText("2023-10-20")).toBeInTheDocument();
         expect(screen.getByText("123")).toBeInTheDocument();
+    });
+
+    test("renders correctly with provided `data` prop without calling API", async () => {
+        const mockData = [
+            { id: 101, report_date: "2023-11-11", db_type: "SQLite", db_version: "3.38", seed: "999" }
+        ];
+
+        // Reset mocks to ensure API is not called
+        const { get_all_reports } = require("../../apis.js");
+        get_all_reports.mockResolvedValue([]); // just in case, but should not be called
+
+        render(
+            <BrowserRouter>
+                <BugsTable data={mockData} />
+            </BrowserRouter>
+        );
+
+        // Spinner shouldn't show since loading is set to false instantly
+        expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
+
+        // Check if data from props is rendered
+        expect(screen.getByText("SQLite")).toBeInTheDocument();
+        expect(get_all_reports).not.toHaveBeenCalled(); // Ensure API is NOT called
     });
 
 
