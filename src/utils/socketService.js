@@ -21,10 +21,15 @@ class SocketService {
       console.log('Disconnected from database server');
     });
     
-    // Set up listeners for database logs
-    this.socket.on('database-log', (log) => {
-      console.log('Database log received:', log);
-      this.notifyListeners('database-log', log);
+    // Set up listeners for statistics updates
+    this.socket.on('statistics-update', (log) => {
+      console.log('Statistics update received:', log);
+      this.notifyListeners('statistics-update', log);
+    });
+
+    this.socket.on('sqlancer-status', (status) => {
+      console.log('SQLancer status update received:', status);
+      this.notifyListeners('sqlancer-status', status);
     });
     
     return this;

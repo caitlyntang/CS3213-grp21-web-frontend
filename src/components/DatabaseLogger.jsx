@@ -12,7 +12,7 @@ function DatabaseLogger() {
     socketService.connect();
     
     // Subscribe to database logs
-    const unsubscribe = socketService.subscribe('database-log', (log) => {
+    const unsubscribe = socketService.subscribe('statistics-update', (log) => {
       setLogs(prevLogs => [...prevLogs, log]);
     });
     

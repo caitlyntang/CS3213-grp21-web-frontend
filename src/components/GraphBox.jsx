@@ -1,32 +1,62 @@
 import { Paper, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
-import React from "react";
+import React, { useEffect, useState } from 'react';
 
+function GraphBox({ runtimeData, queryData, reset }) {
+  const [runtime, setRuntime] = useState([]); // Internal state for x-axis (runtime)
+  const [queries, setQueries] = useState([]); // Internal state for y-axis (queries)
 
-function GraphBox() {
-  const queries = 345677
-    return (
-      <Paper elevation={5} sx={{borderRadius:5, width:500, padding:2}} >
-        <Typography variant='h5' >
-          Total no.of queries
+  useEffect(() => {
+    if (reset) {
+      setRuntime([]); // Clear runtime data
+      setQueries([]); // Clear queries data
+    }
+  }, [reset]); // Reset when the reset prop changes
+
+  useEffect(() => {
+    if (runtimeData !== undefined && queryData !== undefined) {
+      // Update runtime (x-axis)
+      setRuntime((prev) => [...prev, runtimeData]);
+
+      // Update queries (y-axis)
+      setQueries((prev) => [...prev, queryData]);
+    }
+  }, [queryData]); // Update whenever new data is passed in
+
+  return (
+    <Paper elevation={5} sx={{ borderRadius: 5, width: 530, padding: 2 }}>
+      <Typography variant="h5">Total no.of queries</Typography>
+      <Paper elevation={5} sx={{ margin: 1 }}>
+        <Typography variant="h4" fontWeight="bold" textAlign="center">
+          {queries[queries.length - 1] || 0} {/* Display the latest query count */}
         </Typography>
-        <Paper elevation={5} sx={{margin:1}}>
-          <Typography variant='h4' fontWeight={"bold"} textAlign='center'>
-            {queries}
-          </Typography>
-        </Paper >
-        <LineChart
-        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+      </Paper>
+      <LineChart
+        xAxis={[
+          {
+            data: runtime,
+            label: 'Runtime (seconds)', // Label for the x-axis
+            tickLabelStyle: { fontSize: 10 },
+          },
+        ]}
+        yAxis={[
+          {
+            tickLabelStyle: { fontSize: 10 },
+          },
+        ]}
         series={[
           {
-            data: [2, 5.5, 2, 8.5, 1.5, 5],
+            data: queries, // Use queries for the y-axis
+            curve: 'natural', // Smooth line
+            showMark: false, // Hide markers for the line
           },
         ]}
         width={500}
         height={300}
-        />
-      </Paper>
-      
-    )
+        margin={{ left: 70, right: 20, top: 20, bottom: 50 }} // Adjust margins
+      />
+    </Paper>
+  );
 }
-export default GraphBox
+
+export default GraphBox;
