@@ -24,7 +24,7 @@ function GraphBox({ runtimeData, queryData, reset }) {
   }, [queryData]); // Update whenever new data is passed in
 
   return (
-    <Paper elevation={5} sx={{ borderRadius: 5, width: '100%', minWidth: 400, padding: 2 }}>
+    <Paper elevation={5} sx={{ borderRadius: 5, width: '100%', padding: 2 }}>
       <Typography variant="h5">Total no.of queries</Typography>
       <Paper elevation={5} sx={{ margin: 1 }}>
         <Typography variant="h4" fontWeight="bold" textAlign="center">

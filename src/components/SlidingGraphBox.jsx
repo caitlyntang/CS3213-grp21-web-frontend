@@ -30,7 +30,7 @@ export default function SlidingGraphBox({ title, xAxisData, yAxisData, reset }) 
   }, [yAxisData]); // Trigger updates only when yAxisData changes
 
   return (
-    <Paper elevation={5} sx={{ borderRadius: 5, width: '100%', minWidth: 400, padding: 2 }}>
+    <Paper elevation={5} sx={{ borderRadius: 5, width: '100%', padding: 2 }}>
       <Typography variant="h5">{title}</Typography>
       <Paper elevation={5} sx={{ margin: 1 }}>
         <Typography variant="h4" fontWeight="bold" textAlign="center">
