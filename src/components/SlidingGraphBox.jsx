@@ -30,7 +30,7 @@ export default function SlidingGraphBox({ title, xAxisData, yAxisData, reset }) 
   }, [yAxisData]); // Trigger updates only when yAxisData changes
 
   return (
-    <Paper elevation={5} sx={{ borderRadius: 5, width: 420, padding: 2 }}>
+    <Paper elevation={5} sx={{ borderRadius: 5, width: '100%', minWidth: 400, padding: 2 }}>
       <Typography variant="h5">{title}</Typography>
       <Paper elevation={5} sx={{ margin: 1 }}>
         <Typography variant="h4" fontWeight="bold" textAlign="center">
@@ -38,8 +38,7 @@ export default function SlidingGraphBox({ title, xAxisData, yAxisData, reset }) 
         </Typography>
       </Paper>
       <LineChart skipAnimation
-        width={400}
-        height={300}
+        height={300} // Set height for the chart
         xAxis={[{ data: xLabels, label: 'Runtime (seconds)', min: xLabels[0] }]} // Use runtime as x-axis
         series={[
           {
@@ -49,6 +48,7 @@ export default function SlidingGraphBox({ title, xAxisData, yAxisData, reset }) 
           },
         ]}
         margin={{ left: 50, right: 20, top: 20, bottom: 50 }} // Adjust margins
+        sx={{ width: '100%' }} // Full width
       />
     </Paper>
   );

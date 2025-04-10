@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StatBox from '../components/StatBox';
 import GraphBox from '../components/GraphBox';
 import SlidingGraphBox from '../components/SlidingGraphBox';
-import { Grid2 } from '@mui/material';
+import { Grid2 , Box } from '@mui/material';
 import SocketService from '../utils/socketService';
 
 function Dashboard() {
@@ -58,58 +58,60 @@ function Dashboard() {
   };
 
   return (
-    <Grid2 container spacing={3}>
-      <Grid2>
-        <GraphBox
-          runtimeData={sqlancerStatus.runtime} // Pass runtime directly
-          queryData={statistics.queries} // Pass queries directly
-          reset={resetGraphs} // Pass reset flag
-        />
+    <Box sx={{ width: '100%'}}>
+      <Grid2 container spacing={2} justifyContent="center" padding={2} >
+        <Grid2 item xs={12} sm={6} md={3}>
+          <StatBox
+            title="Status"
+            data={
+              <span
+                style={{
+                  color: sqlancerStatus.running ? 'green' : 'red', // Green for running, red for not running
+                  fontWeight: 'bold',
+                }}
+              >
+                {sqlancerStatus.running ? 'Running' : 'Not Running'}
+              </span>
+            }
+          />
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={3} >
+          <StatBox
+            title="Runtime"
+            data={sqlancerStatus.running ? formatRuntime(sqlancerStatus.runtime) : '00:00:00'}
+          />
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={3}>
+          <StatBox title="No.of threads shut down" data={statistics.shutDown} />
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={3}>
+          <StatBox title="% of successful statements" data={statistics.successfulStatements} />
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={4}>
+          <GraphBox
+            runtimeData={sqlancerStatus.runtime} // Pass runtime directly
+            queryData={statistics.queries} // Pass queries directly
+            reset={resetGraphs} // Pass reset flag
+          />
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={4}>
+          <SlidingGraphBox
+            title="Queries/sec"
+            yAxisData={statistics.throughput} // Pass throughput directly
+            xAxisData={sqlancerStatus.runtime} // Pass runtime directly
+            reset={resetGraphs} // Pass reset flag
+          />
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={4}>
+          <SlidingGraphBox 
+            title="Dbs/sec"
+            yAxisData={statistics.throughputDbs} // Pass throughput directly
+            xAxisData={sqlancerStatus.runtime} // Pass runtime directly
+            reset={resetGraphs} // Pass reset flag
+          />
+        </Grid2>
       </Grid2>
-      <Grid2 size={3}>
-        <StatBox
-          title="Status"
-          data={
-            <span
-              style={{
-                color: sqlancerStatus.running ? 'green' : 'red', // Green for running, red for not running
-                fontWeight: 'bold',
-              }}
-            >
-              {sqlancerStatus.running ? 'Running' : 'Not Running'}
-            </span>
-          }
-        />
-      </Grid2>
-      <Grid2 size={3}>
-        <StatBox
-          title="Runtime"
-          data={sqlancerStatus.running ? formatRuntime(sqlancerStatus.runtime) : '00:00:00'}
-        />
-      </Grid2>
-      <Grid2 size={3}>
-        <StatBox title="No.of threads shut down" data={statistics.shutDown} />
-      </Grid2>
-      <Grid2 size={3}>
-        <StatBox title="% of successful statements" data={statistics.successfulStatements} />
-      </Grid2>
-      <Grid2 size={3}>
-        <SlidingGraphBox
-          title="Queries/sec"
-          yAxisData={statistics.throughput} // Pass throughput directly
-          xAxisData={sqlancerStatus.runtime} // Pass runtime directly
-          reset={resetGraphs} // Pass reset flag
-        />
-      </Grid2>
-      <Grid2 size={3}>
-        <SlidingGraphBox
-          title="Dbs/sec"
-          yAxisData={statistics.throughputDbs} // Pass throughput directly
-          xAxisData={sqlancerStatus.runtime} // Pass runtime directly
-          reset={resetGraphs} // Pass reset flag
-        />
-      </Grid2>
-    </Grid2>
+    </Box>
   );
 }
 

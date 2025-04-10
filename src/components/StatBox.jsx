@@ -4,7 +4,7 @@ import React from "react";
 
 function StatBox({title, data}) {
     return (
-        <Paper elevation={5} sx={{borderRadius:5, maxWidth:500, padding:2}} >
+        <Paper elevation={5} sx={{borderRadius:5, width: '100%', padding:2}} >
             <Typography variant='h5' >
             {title}
             </Typography>
