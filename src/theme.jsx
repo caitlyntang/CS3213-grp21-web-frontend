@@ -15,6 +15,9 @@ function ThemeContextProvider({ children }) {
             main: '#F49D00', // Primary color
           },
         },
+        typography: {
+          fontFamily: 'Crimson Text, Arial, sans-serif', // Default font family
+        }
       }),
     [mode]
   );

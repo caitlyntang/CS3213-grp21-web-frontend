@@ -52,7 +52,7 @@ function GraphBox({ runtimeData, queryData, reset }) {
           },
         ]}
         height={300}
-        margin={{ left: 70, right: 20, top: 20, bottom: 50 }} // Adjust margins
+        margin={{ left: 60, right: 20, top: 20, bottom: 50 }} // Adjust margins
         sx={{ width: '100%' }} // Full width
       />
     </Paper>

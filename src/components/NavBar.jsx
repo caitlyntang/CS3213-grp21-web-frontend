@@ -15,7 +15,7 @@ function Navbar() {
         height: "70px", // Fixed height for the navbar
         width: "35%", // Fixed width for the navbar
         maxWidth: "800px", // Maximum width for the navbar
-        minWidth: "400px", // Minimum width for the navbar
+        minWidth: "350px", // Minimum width for the navbar
       }}
     >
       <Button

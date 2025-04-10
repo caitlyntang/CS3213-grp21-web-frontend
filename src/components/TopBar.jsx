@@ -17,6 +17,8 @@ function TopBar() {
           left: 0,
           padding: 2, // Add some padding around the logo
             alignItems: 'center',
+            height: '100%', // Take full height of the container
+            display: 'flex', // Use flexbox to center the logo vertically
         }}
       >
         <img
@@ -25,7 +27,7 @@ function TopBar() {
           style={{
             height: 'auto',
             maxWidth: '25%',
-            minWidth: '300px',
+            minWidth: '250px',
           }}
         />
       </Box>
