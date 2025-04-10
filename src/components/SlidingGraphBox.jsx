@@ -32,7 +32,7 @@ export default function SlidingGraphBox({ title, xAxisData, yAxisData, reset }) 
   return (
     <Paper elevation={5} sx={{ borderRadius: 5, width: '100%', padding: 2 }}>
       <Typography variant="h5">{title}</Typography>
-      <Paper elevation={5} sx={{ margin: 1 }}>
+      <Paper elevation={5} sx={{ margin: 1 , borderRadius: 3}}>
         <Typography variant="h4" fontWeight="bold" textAlign="center">
           {yAxisData || 0} {/* Display the latest y-axis value */}
         </Typography>

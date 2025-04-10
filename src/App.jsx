@@ -4,13 +4,12 @@ import { Container, CssBaseline } from '@mui/material'
 import TopBar from './components/TopBar'
 import Dashboard from './pages/dashboard';
 import Bugs from "./pages/bugs";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import darkTheme from "./theme";
 import BugDetails from "./pages/BugDetails";
+import ThemeContextProvider from "./theme";
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeContextProvider>
       <CssBaseline/>
       <main>
         <TopBar/>
@@ -20,7 +19,7 @@ function App() {
         <Route path="/bugdetails/:id" element={<BugDetails/>}/>
         </Routes>
       </main>
-    </ThemeProvider>
+    </ThemeContextProvider>
       
     
   );
