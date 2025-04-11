@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 export const ThemeContext = createContext();
 
 function ThemeContextProvider({ children }) {
-  const [mode, setMode] = useState('dark'); // Default to light mode
+  const [mode, setMode] = useState('light'); // Default to light mode
 
   const theme = useMemo(
     () =>
